@@ -47,7 +47,7 @@ name_node* find_id(name_node* head)
 	return head;
 }//查找
 
-void detele_name(name_node* head)
+void detele_id(name_node* head)
 {
 	int c;
 	puts("输入你要删除的数据: \n");
