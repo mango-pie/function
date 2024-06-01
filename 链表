@@ -1,0 +1,74 @@
+//c语言链表包含了创建删除和查找
+
+typedef struct name
+{
+	int id;//
+}name;//数据
+
+typedef struct name_node
+{
+	name people;
+	struct name_node* next;
+}name_node;//节点,这样设计方便排序交换数据而不用交换节点
+
+name_node* create_list()
+{
+	name_node* pr = (name_node*)malloc(sizeof(name_node));
+	return pr;
+}//创建节点
+
+void free_list(name_node* head)
+{
+	name_node* temp;
+	while (head != NULL)
+	{
+		temp = head;
+		head = head->next;
+		free(temp);
+	}
+}//释放内存
+
+name_node* find_id(name_node* head)
+{
+	int c;//要查找的数据
+	scanf("%d", &c);
+	name_node* pr = head->next;
+	while (pr != NULL)
+	{
+		if (pr->people.id != c)
+			pr = pr->next;
+		else
+		{
+			//找到了
+			return pr;
+		}
+	}
+	puts("没有找到");
+	return head;
+}//查找
+
+void detele_name(name_node* head)
+{
+	int c;
+	puts("输入你要删除的数据: \n");
+	scanf("%d", &c);
+	name_node* pr = head->next;
+	name_node* pl = head;
+	while (pr != NULL)
+	{
+		if (pr->people.id != c)
+		{
+			pl = pr;
+			pr = pr->next;
+		}
+		else
+		{
+			pl->next = pr->next;
+			free(pr);
+			puts("已删除");
+			break;
+		}
+	}
+	if (pr == NULL)
+		puts("没有找到");
+}//删除
